@@ -54,3 +54,18 @@ bike_share_rides <- bike_share_rides %>%
 
 # Make sure all values of duration_min_const are between 0 and 1440
 assert_all_are_in_closed_range(bike_share_rides$duration_min_const, lower = 0, upper = 1440)
+
+library(lubridate)
+# Convert date to Date type
+bike_share_rides <- bike_share_rides %>%
+  mutate(date = as.Date(date))
+
+# Make sure all dates are in the past
+assert_all_are_in_past(bike_share_rides$date)
+
+# Filter for rides that occurred before or on today's date
+bike_share_rides_past <- bike_share_rides %>%
+  filter(date <= today())
+
+# Make sure all dates from bike_share_rides_past are in the past
+assert_all_are_in_past(bike_share_rides_past$date)
