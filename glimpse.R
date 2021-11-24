@@ -69,3 +69,12 @@ bike_share_rides_past <- bike_share_rides %>%
 
 # Make sure all dates from bike_share_rides_past are in the past
 assert_all_are_in_past(bike_share_rides_past$date)
+
+# Count the number of full duplicates
+sum(duplicated(bike_share_rides))
+
+# Remove duplicates
+bike_share_rides_unique <- distinct(bike_share_rides)
+
+# Count the full duplicates in bike_share_rides_unique
+sum(duplicated(bike_share_rides_unique))
