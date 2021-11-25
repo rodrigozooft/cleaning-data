@@ -38,3 +38,19 @@ accounts %>%
   mutate(theoretical_age = floor(as.numeric(date_opened %--% today(), "years"))) %>%
   # Filter for rows where acct_age is different from theoretical_age
     filter(acct_age != theoretical_age)
+
+# Visualize the missing values by column
+vis_miss(accounts)
+
+accounts %>%
+  # missing_inv: Is inv_amount missing?
+  mutate(missing_inv = is.na(inv_amount)) %>%
+  # Group by missing_inv
+  group_by(missing_inv) %>%
+  # Calculate mean age for each missing_inv group
+  summarize(avg_age = mean(age))
+
+# Sort by age and visualize missing vals
+accounts %>%
+  arrange(age) %>%
+  vis_miss()
