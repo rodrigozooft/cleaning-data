@@ -67,3 +67,11 @@ sfo_survey %>%
   mutate(phone_no_parens = phone_no_parens,
   # Replace all hyphens in phone_no_parens with spaces
          phone_clean = str_replace_all(phone_no_parens, "-", " "))
+
+# Check out the invalid numbers
+sfo_survey %>%
+  filter(str_length(phone) != 12)
+
+# Remove rows with invalid numbers
+sfo_survey %>%
+  filter(str_length(phone) == 12)
