@@ -11,3 +11,11 @@ sfo_survey %>%
   semi_join(dest_sizes, by = "dest_size") %>%
   # Count the number of each dest_size
   count(dest_size)
+
+  # Count dest_size
+sfo_survey %>%
+  count(dest_size)
+
+# Count cleanliness
+sfo_survey %>%
+  count(cleanliness)
