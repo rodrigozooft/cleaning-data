@@ -67,3 +67,14 @@ assert_all_are_not_na(accounts_clean$cust_id)
 
 # Assert that acct_amount_filled has no missing vals
 assert_all_are_not_na(accounts_clean$acct_amount_filled)
+
+# Count the number of each city variation
+zagat %>%
+  count(city)
+
+# Join zagat and cities and look at results
+zagat %>%
+  # Left join based on stringdist using city and city_actual cols
+  stringdist_left_join(cities, by = c("city" = "city_actual")) %>%
+  # Select the name, city, and city_actual cols
+  select(name, city, city_actual)
